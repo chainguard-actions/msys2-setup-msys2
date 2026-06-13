@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v2.30.0 | [`v2.30.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.30.0) | [`4f806de`](https://github.com/msys2/setup-msys2/commit/4f806de0a5a7294ffabaff804b38a9b435a73bda) |
 | v2.31.1 | [`v2.31.1`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.31.1) | [`e989830`](https://github.com/msys2/setup-msys2/commit/e9898307ac31d1a803454791be09ab9973336e1c) |
 
 ## Privacy
