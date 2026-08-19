@@ -1,0 +1,22 @@
+name: Test path-type strict
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          path-type: strict
+          update: false
+          release: false
+          cache: false
+          platform-check-severity: warn
+      - name: Assert action completed with path-type strict
+        run: |
+          echo "Action completed with path-type=strict"
+          echo "msys2-location: '${{ steps.action.outputs.msys2-location }}'"
+          echo "PASS: action did not fatally exit with path-type=strict"

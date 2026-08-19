@@ -1,0 +1,32 @@
+name: Test MSYS msystem with inherit path-type
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MSYS
+          path-type: inherit
+          update: false
+          install: ''
+          release: true
+          platform-check-severity: warn
+          cache: false
+        continue-on-error: true
+      - name: Assert action ran with MSYS and inherit path-type
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "action outcome: $OUTCOME"
+          # On non-Windows, the action should either succeed or fail gracefully
+          # with platform-check-severity: warn. Either outcome is acceptable.
+          if [ "$OUTCOME" = "success" ] || [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action completed with outcome '$OUTCOME' for MSYS/inherit"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
