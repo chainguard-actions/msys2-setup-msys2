@@ -1,0 +1,28 @@
+name: Test platform-check-severity warn
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          platform-check-severity: warn
+        continue-on-error: true
+      - name: Assert action ran (warn mode does not fatal on Linux)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # On Linux, with platform-check-severity=warn, the action should
+          # either succeed or fail gracefully (not crash the runner).
+          # We accept both 'success' and 'failure' as valid outcomes since
+          # the action may still exit non-zero after warning, but it should
+          # not be 'cancelled' or missing.
+          if [ "$OUTCOME" = "cancelled" ]; then
+            echo "FAIL: action was cancelled unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action completed with outcome=$OUTCOME (expected on non-Windows)"

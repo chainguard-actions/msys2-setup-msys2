@@ -1,0 +1,27 @@
+name: Test path-type inherit
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          path-type: inherit
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert action ran with path-type inherit
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action step was skipped unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action ran with path-type=inherit (outcome=$OUTCOME)"

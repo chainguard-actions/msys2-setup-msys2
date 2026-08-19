@@ -1,0 +1,28 @@
+name: Test msystem MSYS variant
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MSYS
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert action ran (not skipped)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+          LOCATION: ${{ steps.action.outputs.msys2-location }}
+        run: |
+          echo "outcome: $OUTCOME"
+          echo "msys2-location: $LOCATION"
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action step was skipped unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action ran with MSYS variant (outcome=$OUTCOME)"

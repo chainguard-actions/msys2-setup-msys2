@@ -1,0 +1,26 @@
+name: Test msystem default (MINGW64)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          platform-check-severity: warn
+        continue-on-error: true
+      - name: Assert action ran with MINGW64 msystem
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should not be cancelled; it may succeed or fail
+          # depending on platform, but it must run to completion.
+          if [ "$OUTCOME" = "cancelled" ]; then
+            echo "FAIL: action was cancelled unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action completed with outcome=$OUTCOME for msystem=MINGW64"

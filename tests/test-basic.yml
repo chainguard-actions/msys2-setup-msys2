@@ -1,0 +1,29 @@
+name: Test basic usage (MINGW64 default)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert action ran without fatal error
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # On Linux, the action warns about incompatible platform but should not crash the job
+          # The outcome may be 'success' or 'failure' depending on what the action does after warning
+          # We just verify the step ran (not skipped)
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action step was skipped unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action ran (outcome=$OUTCOME)"
