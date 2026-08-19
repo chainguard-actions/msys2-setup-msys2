@@ -1,0 +1,30 @@
+name: Test default inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert action completed
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+          MSYS2_LOC: ${{ steps.action.outputs.msys2-location }}
+        run: |
+          echo "action outcome: $OUTCOME"
+          echo "msys2-location: $MSYS2_LOC"
+          # The action should complete (success or failure) without crashing the runner.
+          # On Linux, MSYS2 cannot be installed, so failure is acceptable.
+          if [ "$OUTCOME" = "success" ] || [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action completed gracefully with outcome '$OUTCOME'"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi

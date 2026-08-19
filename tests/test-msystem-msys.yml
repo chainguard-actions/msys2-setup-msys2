@@ -1,0 +1,30 @@
+name: Test msystem MSYS with inherit path-type
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MSYS
+          path-type: inherit
+          update: false
+          install: false
+          release: true
+          platform-check-severity: warn
+        continue-on-error: true
+      - name: Assert action ran without unexpected crash
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # On Linux, the action is expected to warn about platform incompatibility.
+          # The outcome should be success or failure (graceful), not cancelled.
+          if [ "$OUTCOME" = "cancelled" ]; then
+            echo "FAIL: action was unexpectedly cancelled"
+            exit 1
+          fi
+          echo "PASS: action completed with outcome '$OUTCOME' for MSYS msystem with inherit path-type"

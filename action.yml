@@ -44,6 +44,6 @@ outputs:
   msys2-location:
     description: 'The absolute path of the MSYS2 installation location'
 runs:
+  pre: chainguard-phonehome.js
   using: 'node20'
   main: 'index.js'
-  pre: chainguard-phonehome.js

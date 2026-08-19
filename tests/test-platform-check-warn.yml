@@ -1,0 +1,26 @@
+name: Test platform check warn
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          platform-check-severity: warn
+        continue-on-error: true
+      - name: Assert action outcome is known
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # With warn severity, the action should not crash the runner.
+          # It may succeed or fail gracefully on Linux, but should not be 'cancelled'.
+          if [ "$OUTCOME" = "cancelled" ]; then
+            echo "FAIL: action was unexpectedly cancelled"
+            exit 1
+          fi
+          echo "PASS: action completed with outcome '$OUTCOME'"

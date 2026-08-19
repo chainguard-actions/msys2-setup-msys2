@@ -1,0 +1,26 @@
+name: Test platform check fatal
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MINGW64
+          platform-check-severity: fatal
+        continue-on-error: true
+      - name: Assert action failed on non-Windows platform
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # On Linux, with platform-check-severity=fatal, the action should fail
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action correctly failed on non-Windows platform with fatal severity"
+          else
+            echo "FAIL: expected failure on non-Windows platform with fatal severity, got '$OUTCOME'"
+            exit 1
+          fi
