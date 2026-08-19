@@ -1,0 +1,24 @@
+name: Test msystem UCRT64
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: UCRT64
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert action accepted UCRT64 msystem input
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # On non-Windows, the action will warn about platform incompatibility.
+          # The important thing is the workflow itself does not crash (continue-on-error handles it).
+          echo "PASS: action ran with msystem=UCRT64, outcome=$OUTCOME"

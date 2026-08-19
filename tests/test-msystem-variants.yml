@@ -1,0 +1,72 @@
+name: Test msystem variants accepted
+on:
+  workflow_dispatch:
+jobs:
+  test-ucrt64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: UCRT64
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert UCRT64 variant accepted
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "FAIL: action should not fail with UCRT64 msystem and warn severity"
+            exit 1
+          fi
+          echo "PASS: UCRT64 variant accepted"
+
+  test-clang64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: CLANG64
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert CLANG64 variant accepted
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "FAIL: action should not fail with CLANG64 msystem and warn severity"
+            exit 1
+          fi
+          echo "PASS: CLANG64 variant accepted"
+
+  test-msys:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          msystem: MSYS
+          platform-check-severity: warn
+          release: false
+          cache: false
+        continue-on-error: true
+      - name: Assert MSYS variant accepted
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "FAIL: action should not fail with MSYS msystem and warn severity"
+            exit 1
+          fi
+          echo "PASS: MSYS variant accepted"
