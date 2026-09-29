@@ -1,6 +1,11 @@
 {
   "owner": "msys2",
   "repo": "setup-msys2",
-  "version": "",
-  "url": "https://github.com/msys2/setup-msys2"
+  "version": "v2.33.0",
+  "commit_sha": "ec48f7c5447b3140e2b088413ae3a55687bccb6e",
+  "url": "https://github.com/msys2/setup-msys2",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2"
 }
