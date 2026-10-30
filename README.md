@@ -6,13 +6,13 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v2.30.0 | [`v2.30.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.30.0) | [`4f806de`](https://github.com/msys2/setup-msys2/commit/4f806de0a5a7294ffabaff804b38a9b435a73bda) |
-| v2.31.0 | [`v2.31.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.31.0) | [`cafece8`](https://github.com/msys2/setup-msys2/commit/cafece8e6baf9247cf9b1bf95097b0b983cc558d) |
-| v2.31.1 | [`v2.31.1`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.31.1) | [`e989830`](https://github.com/msys2/setup-msys2/commit/e9898307ac31d1a803454791be09ab9973336e1c) |
-| v2.32.0 | [`v2.32.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.32.0) | [`66cd2cc`](https://github.com/msys2/setup-msys2/commit/66cd2cce69caa17b53920067426061ca1de3a884) |
-| v2.33.0 | [`v2.33.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.33.0) | [`ec48f7c`](https://github.com/msys2/setup-msys2/commit/ec48f7c5447b3140e2b088413ae3a55687bccb6e) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v2.30.0 | [`v2.30.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.30.0) | [`4f806de`](https://github.com/msys2/setup-msys2/commit/4f806de0a5a7294ffabaff804b38a9b435a73bda) | [`HARDENING.md`](https://github.com/chainguard-actions/msys2-setup-msys2/blob/v2.30.0/HARDENING.md) |
+| v2.31.0 | [`v2.31.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.31.0) | [`cafece8`](https://github.com/msys2/setup-msys2/commit/cafece8e6baf9247cf9b1bf95097b0b983cc558d) | [`HARDENING.md`](https://github.com/chainguard-actions/msys2-setup-msys2/blob/v2.31.0/HARDENING.md) |
+| v2.31.1 | [`v2.31.1`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.31.1) | [`e989830`](https://github.com/msys2/setup-msys2/commit/e9898307ac31d1a803454791be09ab9973336e1c) | [`HARDENING.md`](https://github.com/chainguard-actions/msys2-setup-msys2/blob/v2.31.1/HARDENING.md) |
+| v2.32.0 | [`v2.32.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.32.0) | [`66cd2cc`](https://github.com/msys2/setup-msys2/commit/66cd2cce69caa17b53920067426061ca1de3a884) | [`HARDENING.md`](https://github.com/chainguard-actions/msys2-setup-msys2/blob/v2.32.0/HARDENING.md) |
+| v2.33.0 | [`v2.33.0`](https://github.com/chainguard-actions/msys2-setup-msys2/tree/v2.33.0) | [`ec48f7c`](https://github.com/msys2/setup-msys2/commit/ec48f7c5447b3140e2b088413ae3a55687bccb6e) | — |
 
 ## Privacy
 
